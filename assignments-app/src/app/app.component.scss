@@ -1,0 +1,42 @@
+.body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  flex-grow: 1;
+  width: 80%;
+  min-width: 300px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.full-height{
+  height: 100%;
+}
+
+.footer{
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.credits{
+  font-size: medium;
+  font-weight: normal;
+  font-variant-caps: all-small-caps;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+:host{
+  box-sizing: border-box;
+  display: block;
+  height: 100%;
+}

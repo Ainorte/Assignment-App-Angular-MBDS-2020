@@ -1,0 +1,20 @@
+<cdk-virtual-scroll-viewport #scroller class="viewport" itemSize="75">
+  <mat-list>
+    <nav *cdkVirtualFor="let assignment of assignments">
+      <a routerLink="/assignment/{{ this.assignment._id }}">
+        <h3 mat-subheader>
+          Date de rendu : {{ assignment.dateDeRendu | date }}
+        </h3>
+        <mat-list-item>
+          <p *ngIf="assignment.rendu; else nonSoumis">
+            Devoir intitulé {{ assignment.nom }} a été rendu.
+          </p>
+          <ng-template #nonSoumis>
+            <p>Le devoir {{ assignment.nom }} n'a pas été rendu.</p>
+          </ng-template>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </a>
+    </nav>
+  </mat-list>
+</cdk-virtual-scroll-viewport>

@@ -1,0 +1,25 @@
+<mat-tab-group mat-stretch-tabs >
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">alarm</mat-icon>
+      À rendre
+    </ng-template>
+    <ng-template matTabContent>
+      <div class="content">
+        <app-assignments-list rendu="false"></app-assignments-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">done_outline</mat-icon>
+      Rendu
+    </ng-template>
+    <ng-template matTabContent>
+      <div class="content">
+        <app-assignments-list  rendu="true"></app-assignments-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+

@@ -1,0 +1,12 @@
+/*Propage le flexbox jusqu'au composant de liste*/
+:host, mat-tab-group, ::ng-deep .mat-tab-body-wrapper, ::ng-deep mat-tab-body, ::ng-deep .mat-tab-body-content, .content, app-assignments-list {
+  flex: 1;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.tab-icon {
+  margin-right: 8px;
+}
+
+/*# sourceMappingURL=assignments.component.css.map */

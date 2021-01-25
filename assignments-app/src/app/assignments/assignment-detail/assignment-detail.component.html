@@ -1,0 +1,19 @@
+<div class="container">
+  <mat-card *ngIf="assignment">
+    <mat-card-title>{{assignment.nom}}</mat-card-title>
+    <mat-card-subtitle>{{assignment.dateDeRendu | date}}</mat-card-subtitle>
+    <mat-checkbox (click)="onAssignementRendu()" *ngIf="!assignment.rendu">
+      Assignment rendu
+    </mat-checkbox>
+
+    <button (click)="onClickEdit()" [disabled]="!loggedIn()"
+            color="primary"
+            mat-raised-button>
+      EDIT
+    </button>
+
+    <button (click)="onDelete()" color="warn" mat-raised-button>
+      DELETE
+    </button>
+  </mat-card>
+</div>
