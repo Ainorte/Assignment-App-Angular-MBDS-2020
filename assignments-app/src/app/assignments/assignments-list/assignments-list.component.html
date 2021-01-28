@@ -1,6 +1,6 @@
 <cdk-virtual-scroll-viewport #scroller class="viewport" itemSize="75">
-  <mat-grid-list *cdkVirtualFor="let assignment of assignments" cols="3" rowHeight="2:1">
-    <mat-grid-tile>
+  <nav *cdkVirtualFor="let assignment of assignments">
+
       <a routerLink="/assignment/{{ this.assignment._id }}">
         <mat-card>
           <mat-card-header>
@@ -10,7 +10,7 @@
           </mat-card-header>
 
           <mat-card-content>
-            <p *ngIf="assignment.rendu; else nonSoumis">
+            <p *ngIf="rendu; else nonSoumis">
               Le devoir {{ assignment.nom }} a été rendu.
             </p>
             <ng-template #nonSoumis>
@@ -21,8 +21,8 @@
         </mat-card>
       </a>
 
-    </mat-grid-tile>
-  </mat-grid-list>
+
+  </nav>
   <!-- <mat-list>
     <nav *cdkVirtualFor="let assignment of assignments">
       <a routerLink="/assignment/{{ this.assignment._id }}">
