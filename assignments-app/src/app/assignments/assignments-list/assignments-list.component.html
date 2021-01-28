@@ -1,5 +1,29 @@
 <cdk-virtual-scroll-viewport #scroller class="viewport" itemSize="75">
-  <mat-list>
+  <mat-grid-list *cdkVirtualFor="let assignment of assignments" cols="3" rowHeight="2:1">
+    <mat-grid-tile>
+      <a routerLink="/assignment/{{ this.assignment._id }}">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{assignment.nom}}</mat-card-title>
+          <mat-card-subtitle *ngIf="assignment.rendu">Rendu le : {{ assignment.dateDeRendu | date }}</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="!assignment.rendu">A rendre le : {{ assignment.dateDeRendu | date }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p *ngIf="assignment.rendu; else nonSoumis">
+              Le devoir {{ assignment.nom }} a été rendu.
+            </p>
+            <ng-template #nonSoumis>
+              <p>Le devoir {{ assignment.nom }} n'a pas été rendu.</p>
+            </ng-template>
+          </mat-card-content>
+
+        </mat-card>
+      </a>
+
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!-- <mat-list>
     <nav *cdkVirtualFor="let assignment of assignments">
       <a routerLink="/assignment/{{ this.assignment._id }}">
         <h3 mat-subheader>
@@ -16,5 +40,5 @@
         </mat-list-item>
       </a>
     </nav>
-  </mat-list>
+  </mat-list> -->
 </cdk-virtual-scroll-viewport>

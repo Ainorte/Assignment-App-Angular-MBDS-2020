@@ -36,4 +36,8 @@
   flex-grow: 1;
 }
 
+mat-grid-tile {
+  background: lightblue;
+}
+
 /*# sourceMappingURL=assignments-list.component.css.map */

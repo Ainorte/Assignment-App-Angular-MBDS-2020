@@ -16,6 +16,11 @@ import {AssignmentsListComponent} from './assignments-list/assignments-list.comp
 import {AddAssignmentComponent} from './add-assignment/add-assignment.component';
 import {AssignmentDetailComponent} from './assignment-detail/assignment-detail.component';
 import { EditAssignmentComponent } from './edit-assignment/edit-assignment.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
 
 @NgModule({
   declarations: [
@@ -38,7 +43,10 @@ import { EditAssignmentComponent } from './edit-assignment/edit-assignment.compo
     RouterModule,
     ScrollingModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatGridListModule
   ]
 })
 export class AssignmentsModule {

@@ -1,19 +1,33 @@
 <div class="container">
   <mat-card *ngIf="assignment">
-    <mat-card-title>{{assignment.nom}}</mat-card-title>
+    <mat-card-header>
+      <mat-card-title>{{assignment.nom}}</mat-card-title>
     <mat-card-subtitle>{{assignment.dateDeRendu | date}}</mat-card-subtitle>
-    <mat-checkbox (click)="onAssignementRendu()" *ngIf="!assignment.rendu">
-      Assignment rendu
-    </mat-checkbox>
+    </mat-card-header>
 
-    <button (click)="onClickEdit()" [disabled]="!loggedIn()"
+    <mat-card-content>
+      <mat-checkbox [(ngModel)]="assignment.rendu" (click)="onAssignementRendu()" *ngIf="!assignment.rendu">
+        Assignment rendu
+      </mat-checkbox>
+    </mat-card-content>
+      <p *ngIf="assignment.rendu; else nonSoumis">
+            Devoir intitulé {{ assignment.nom }} a été rendu.
+          </p>
+          <ng-template #nonSoumis>
+            <p>Le devoir {{ assignment.nom }} n'a pas été rendu.</p>
+          </ng-template>
+    <mat-card-actions>
+      <button (click)="onClickEdit()" [disabled]="!loggedIn()"
             color="primary"
             mat-raised-button>
-      EDIT
-    </button>
+        EDIT
+      </button>
 
-    <button (click)="onDelete()" color="warn" mat-raised-button>
-      DELETE
-    </button>
+      <button (click)="onDelete()" color="warn" mat-raised-button>
+        DELETE
+      </button>
+
+    </mat-card-actions>
+
   </mat-card>
 </div>
