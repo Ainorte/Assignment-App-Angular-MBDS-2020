@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 const auth = require('../routes/auth');
-const account = require("../account")
+const account = require("../account");
+
+app.route('/register')
+    .post(auth.register);
 
 app.route('/login')
     .post(auth.login);

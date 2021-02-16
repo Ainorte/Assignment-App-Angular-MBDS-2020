@@ -6,18 +6,22 @@
       </a>
       <h1>{{title}}</h1>
       <span class="spacer"></span>
-      <a mat-icon-button routerLink="/add" aria-label="Ajouter un devoir">
+      <a *ngIf="isLogged" mat-icon-button routerLink="/add" aria-label="Ajouter un devoir">
         <mat-icon>add</mat-icon>
       </a>
+      <button *ngIf="isLogged" mat-icon-button aria-label="Se déconnecter" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
   </header>
-  <main fxFlex>
+  <main>
     <router-outlet>
     </router-outlet>
   </main>
-  <footer>
+  <!--Ugly with infinite scroll-->
+  <!--<footer>
     <mat-toolbar color="primary" class="footer">
       <span class="credits">Kamel Bourek et William Poitevin - MIAGE Sophia MBDS - 2020/2021</span>
     </mat-toolbar>
-  </footer>
+  </footer>-->
 </div>

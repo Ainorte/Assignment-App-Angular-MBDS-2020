@@ -5,19 +5,27 @@ import {AddAssignmentComponent} from './assignments/add-assignment/add-assignmen
 import {AssignmentDetailComponent} from './assignments/assignment-detail/assignment-detail.component';
 import {EditAssignmentComponent} from "./assignments/edit-assignment/edit-assignment.component";
 import {AuthGuard} from "./shared/auth.guard";
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'home',
-    component: AssignmentsComponent
+    component: AssignmentsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'add',
-    component: AddAssignmentComponent
+    component: AddAssignmentComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'assignment/:id',
-    component: AssignmentDetailComponent
+    component: AssignmentDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',

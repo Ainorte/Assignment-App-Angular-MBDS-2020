@@ -36,10 +36,13 @@
   flex-grow: 1;
 }
 
-mat-grid-tile {
-  background: lightblue;
+mat-card {
+  box-shadow: 10px 5px 5px grey;
+  margin-bottom: 1%;
 }
 
-
+cdk-virtual-scroll-viewport {
+  background-color: #d1e0e0;
+}
 
 /*# sourceMappingURL=assignments-list.component.css.map */

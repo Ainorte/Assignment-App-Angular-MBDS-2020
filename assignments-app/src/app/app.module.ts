@@ -9,22 +9,25 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {AssignmentsModule} from './assignments/assignments.module';
 import {HttpClientModule} from '@angular/common/http';
+import {LoginModule} from './login/login.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AssignmentsModule,
+    LoginModule,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
     HttpClientModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
