@@ -86,7 +86,7 @@ function login(req, res){
         }
         //Identifiant ou mot de passe incorrect, on ne donne pas trop d'informations pour la sécurité.
         if(!user || !bcrypt.compareSync(password, user.password))
-            return res.status(401).send({ auth: false, token: null, message: 'Identifiant et/ou mot de passe incorrects.' })
+            return res.status(401).send({ auth: false, token: '', message: 'Identifiant et/ou mot de passe incorrects.' })
 
         //Créer le token de connexion.
         const token = jwt.sign({id: user._id}, config.JWT_secret, {expiresIn: config.JWT_expireTime});
@@ -106,7 +106,7 @@ function changePassword(req, res) {
     const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
     //Met a jour l'utilisateur courant
-    User.findByIdAndUpdate(req.user._id, {password: hashedPassword}, (err, user) => {
+    User.findByIdAndUpdate(req.user._id, {password: hashedPassword, premiere_connexion: false}, (err, user) => {
         if (err) {
             console.log(err)
             return res.status(500).send('Erreur sur le serveur.');

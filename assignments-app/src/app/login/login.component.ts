@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../shared/auth.service";
 import {Router} from "@angular/router";
+import {MatSnackBar, MatSnackBarRef, TextOnlySnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  invalidLogin: boolean = false;
+  errorSnackBar:MatSnackBarRef<TextOnlySnackBar>;
 
   //form
   form: FormGroup = new FormGroup({
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private authService:AuthService,
-              private router:Router) { }
+              private router:Router,
+              private snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -37,10 +39,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    if(this.errorSnackBar != undefined)
+      this.errorSnackBar.dismiss();
+
     if(this.form.valid){
       this.authService.logIn(this.form.controls.email.value, this.form.controls.password.value).subscribe(auth => {
-        if(auth){
-          this.router.navigate(['/changePassword']);
+        if(auth.auth){
+          this.router.navigate(['/']);
+        }
+        else{
+          this.errorSnackBar = this.snackBar.open(auth.message);
         }
       });
     }

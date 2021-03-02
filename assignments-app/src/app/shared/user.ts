@@ -3,6 +3,6 @@ export class User {
   nom: String;
   email: String;
   role: String;
-  premiere_connexion: String;
+  premiere_connexion: Boolean;
   image: String;
 }

@@ -8,18 +8,20 @@ import {MatIconModule} from '@angular/material/icon';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [LoginComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
-    MatInputModule, MatButtonModule,
+    MatInputModule,
+    MatButtonModule,
     FormsModule,
     MatIconModule,
-    MatCardModule, ReactiveFormsModule
+    MatCardModule,
+    ReactiveFormsModule,
+    MatSnackBarModule
   ]
 })
 export class LoginModule { }

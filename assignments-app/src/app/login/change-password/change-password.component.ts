@@ -6,6 +6,7 @@ import {
   ValidatorFn,
   Validators
 } from "@angular/forms";
+import {Router} from "@angular/router";
 
 //Contrôle de l'égalité des mots de passe
 // https://jasonwatmore.com/fr/post/2019/06/14/angular-8-exemple-de-validation-de-formulaires-reactifs-reactive-forms
@@ -46,7 +47,8 @@ export class ChangePasswordComponent implements OnInit {
     validators: passwordsMustMatch
   });
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -54,7 +56,7 @@ export class ChangePasswordComponent implements OnInit {
   changePassword(){
     if(this.form.valid){
       this.authService.changePassword(this.form.controls["password"].value).subscribe( res => {
-        console.log(res);
+        this.router.navigate(['/']);
       });
     }
   }

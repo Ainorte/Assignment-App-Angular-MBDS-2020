@@ -16,8 +16,9 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'changePassword',
+    path: 'changepassword',
     component: ChangePasswordComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',

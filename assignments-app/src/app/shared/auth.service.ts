@@ -57,8 +57,7 @@ export class AuthService {
 
   changePassword(password:string):Observable<any>{
     return this.http
-      .post(`${environment.apiUri}changepassword`, {password: password})
-      .pipe(catchError(this.handleError('changePassword')));
+      .post(`${environment.apiUri}changepassword`, {password: password});
   }
 
   private handleError(operation: string, res?: HttpResponse<any>): (error: any) => Observable<Auth> {
@@ -66,10 +65,9 @@ export class AuthService {
       console.log(error);
       console.log(operation + ' issue : ' + error.message);
 
-      const json = JSON.parse(res.body);
       const result = new Auth();
       result.auth = false;
-      result.message = json.message;
+      result.message = error.error.message || error.error ;
 
       return of(result);
     };
