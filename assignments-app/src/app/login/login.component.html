@@ -21,11 +21,8 @@
           formControlName="password"
           name="password"
           matInput
-          [type]="hidePassword ? 'password' : 'text'"
+          type="password"
           required />
-        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Afficher mot de passe'" [attr.aria-pressed]="hidePassword" >
-          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
         <mat-error>Mot de passe obligatoire</mat-error>
       </mat-form-field>
       <button class="submit" mat-raised-button color="primary">

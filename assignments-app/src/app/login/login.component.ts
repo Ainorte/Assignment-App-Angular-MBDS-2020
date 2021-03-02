@@ -10,7 +10,6 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  hidePassword: boolean = true;
   invalidLogin: boolean = false;
 
   //form
@@ -41,7 +40,7 @@ export class LoginComponent implements OnInit {
     if(this.form.valid){
       this.authService.logIn(this.form.controls.email.value, this.form.controls.password.value).subscribe(auth => {
         if(auth){
-          this.router.navigate(['/home']);
+          this.router.navigate(['/changePassword']);
         }
       });
     }

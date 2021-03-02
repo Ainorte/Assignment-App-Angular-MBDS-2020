@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const config = require('./config');
 const AuthController = require('./controller/authController')
+const UserController = require('./controller/userController')
 const AssignmentController = require('./controller/assignmentController')
 
 const mongoose = require('mongoose');
@@ -28,9 +29,12 @@ mongoose.connect(config.mongoDB_uri, options)
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
+  if('OPTIONS' === req.method){
+      return res.sendStatus(200);
+  }
+  return next();
 });
 
 // Pour les formulaires
@@ -44,6 +48,8 @@ const prefix = '/api';
 
 //Auth
 app.use(prefix, AuthController);
+//User
+app.use(prefix, UserController);
 //Assignments
 app.use(prefix, AssignmentController);
 

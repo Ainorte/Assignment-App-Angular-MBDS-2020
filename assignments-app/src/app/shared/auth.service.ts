@@ -10,13 +10,11 @@ import {Auth, AuthResponse} from "./auth.model";
 })
 export class AuthService {
 
-  private uri = `${environment.apiUri}/login`;
-  private token :String = null;
+  token :string = null;
 
   get isLogged(): boolean {
     return this.token != null;
   }
-
 
   constructor(private http: HttpClient) {}
 
@@ -26,7 +24,7 @@ export class AuthService {
       password: password
     };
 
-    return this.http.post<AuthResponse>(this.uri,body)
+    return this.http.post<AuthResponse>(`${environment.apiUri}login`,body)
       .pipe(
         map(res => {
           if(res.auth){
@@ -57,8 +55,10 @@ export class AuthService {
     return of(result);
   }
 
-  isConnected(): Observable<boolean>{
-    return of(this.isLogged);
+  changePassword(password:string):Observable<any>{
+    return this.http
+      .post(`${environment.apiUri}changepassword`, {password: password})
+      .pipe(catchError(this.handleError('changePassword')));
   }
 
   private handleError(operation: string, res?: HttpResponse<any>): (error: any) => Observable<Auth> {

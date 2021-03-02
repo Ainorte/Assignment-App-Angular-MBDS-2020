@@ -8,12 +8,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {AssignmentsModule} from './assignments/assignments.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {LoginModule} from './login/login.module';
+import {UsersModule} from "./users/users.module";
+import {AuthInterceptor} from "./shared/auth.interceptor";
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -21,12 +23,20 @@ import {LoginModule} from './login/login.module';
     BrowserAnimationsModule,
     AssignmentsModule,
     LoginModule,
+    UsersModule,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    //Ajoute un intercepteur pour le token dans les appels api
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   exports: [],
   bootstrap: [AppComponent]
 })

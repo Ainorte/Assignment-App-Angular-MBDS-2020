@@ -6,11 +6,18 @@ import {AssignmentDetailComponent} from './assignments/assignment-detail/assignm
 import {EditAssignmentComponent} from "./assignments/edit-assignment/edit-assignment.component";
 import {AuthGuard} from "./shared/auth.guard";
 import {LoginComponent} from './login/login.component';
+import {UsersComponent} from "./users/users.component";
+import {AdminGuard} from "./shared/admin.guard";
+import {ChangePasswordComponent} from "./login/change-password/change-password.component";
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'changePassword',
+    component: ChangePasswordComponent,
   },
   {
     path: 'home',
@@ -28,14 +35,19 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  {
     path: 'assignment/:id/edit',
     component: EditAssignmentComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
   }
 ];
 

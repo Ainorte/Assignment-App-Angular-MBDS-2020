@@ -97,10 +97,13 @@ function login(req, res){
 }
 
 function changePassword(req, res) {
+    console.log("user " + req.user.email + " : édite mot de passe");
+
+    if(!req.body.password){
+        return res.status(400).send('Missing password.');
+    }
     //hash le nouveau mot de passe
     const hashedPassword = bcrypt.hashSync(req.body.password, 8);
-
-    console.log("user :" + req.user._id + " : édite mot de passe");
 
     //Met a jour l'utilisateur courant
     User.findByIdAndUpdate(req.user._id, {password: hashedPassword}, (err, user) => {
