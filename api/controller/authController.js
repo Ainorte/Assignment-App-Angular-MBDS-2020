@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express();
 const auth = require('../routes/auth');
-const account = require("../account");
+const {checkAccount, checkAdmin} = require("../account");
 
-//Non utilisée, création des utilisateur par le compte admin
-/*app.route('/register')
-    .post(auth.register);*/
+//création des utilisateur par le compte admin
+app.route('/register')
+    .post(checkAdmin, auth.register);
 
 app.route('/login')
     .post(auth.login);
 
 app.route('/changepassword')
-    .post(account, auth.changePassword)
+    .post(checkAccount, auth.changePassword)
 
 module.exports = app;

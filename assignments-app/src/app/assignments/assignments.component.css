@@ -9,4 +9,10 @@
   margin-right: 8px;
 }
 
+.addButton {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}
+
 /*# sourceMappingURL=assignments.component.css.map */

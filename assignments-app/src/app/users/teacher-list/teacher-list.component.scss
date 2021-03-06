@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.viewport {
+  flex: 1;
+  min-height: 300px;
+  border: 1px solid black;
+}
+
+.tab {
+  height: 600px;
+}
+
+.mat-tab-body-wrapper{
+  flex-grow: 1;
+}
+
+mat-card {
+  box-shadow: 10px 5px 5px grey;
+  margin-bottom: 1%;
+}
+.addButton{
+  position:fixed;
+  bottom:40px;
+  right:40px;
+}

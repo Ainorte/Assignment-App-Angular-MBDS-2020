@@ -1,0 +1,24 @@
+<mat-tab-group mat-stretch-tabs >
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">groups</mat-icon>
+      Classes
+    </ng-template>
+    <ng-template matTabContent>
+      <div class="content">
+        <app-classes-list></app-classes-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">school</mat-icon>
+      Professeurs
+    </ng-template>
+    <ng-template matTabContent>
+      <div class="content">
+        <app-teacher-list></app-teacher-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

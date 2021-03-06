@@ -1,0 +1,17 @@
+<cdk-virtual-scroll-viewport #scroller class="viewport" itemSize="75">
+  <nav *cdkVirtualFor="let teacher of teachers">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{teacher.prenom}} {{teacher.nom}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        Role : {{teacher.role}}
+      </mat-card-content>
+
+    </mat-card>
+  </nav>
+</cdk-virtual-scroll-viewport>
+<a class="addButton" mat-fab color="primary" routerLink="/teacher/add">
+  <mat-icon>add</mat-icon>
+</a>

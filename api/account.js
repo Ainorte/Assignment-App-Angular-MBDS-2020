@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('./model/user');
 const config = require('./config');
+const role = require('./model/roles');
 
 // https://etienner.github.io/api-json-web-token-authentication-jwt-sur-express-js/
 // Bearer token
@@ -39,7 +40,16 @@ function checkAccount(req, res, next){
             return next();
         });
     });
-
 }
 
-module.exports = checkAccount;
+function checkAdmin(req, res, next){
+    checkAccount(req, res, function () {
+        if (req.user.role !== role.ADMIN){
+            return res.status(403).send('Accès interdit');
+        }
+
+        return next();
+    });
+}
+
+module.exports = {checkAccount, checkAdmin};

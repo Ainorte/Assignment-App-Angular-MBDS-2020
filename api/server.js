@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const config = require('./config');
 const AuthController = require('./controller/authController')
 const UserController = require('./controller/userController')
+const ClassController = require('./controller/classController')
 const AssignmentController = require('./controller/assignmentController')
 
 const mongoose = require('mongoose');
@@ -48,8 +49,10 @@ const prefix = '/api';
 
 //Auth
 app.use(prefix, AuthController);
-//User
+//UserModel
 app.use(prefix, UserController);
+//Class
+app.use(prefix, ClassController);
 //Assignments
 app.use(prefix, AssignmentController);
 

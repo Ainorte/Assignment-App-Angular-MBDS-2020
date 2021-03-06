@@ -9,6 +9,8 @@ import {LoginComponent} from './login/login.component';
 import {UsersComponent} from "./users/users.component";
 import {AdminGuard} from "./shared/admin.guard";
 import {ChangePasswordComponent} from "./login/change-password/change-password.component";
+import {AddClassComponent} from "./users/classes-list/add-class/add-class.component";
+import {AddTeacherComponent} from "./users/teacher-list/add-teacher/add-teacher.component";
 
 const routes: Routes = [
   {
@@ -43,6 +45,16 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'class/add',
+    component: AddClassComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'teacher/add',
+    component: AddTeacherComponent,
     canActivate: [AdminGuard]
   },
   {

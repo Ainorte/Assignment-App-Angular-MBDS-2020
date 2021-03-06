@@ -6,3 +6,9 @@ export class User {
   premiere_connexion: Boolean;
   image: String;
 }
+
+export enum Role {
+  ADMIN= "Administrateur",
+  TEACHER= "Professeur",
+  STUDENT= "Étudiant"
+}

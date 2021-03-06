@@ -3,7 +3,6 @@ const app = express();
 const assignment = require('../routes/assignments');
 
 app.route('/assignments')
-app.route('/assignments')
     .get(assignment.getAssignments);
 
 app.route('/assignments/:id')

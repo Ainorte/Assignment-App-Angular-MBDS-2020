@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
-const account = require("../account");
+const {checkAccount, checkAdmin} = require("../account");
 const user = require("../routes/user")
 
 app.route('/user')
-    .get(account, user.getUser);
+    .get(checkAccount, user.getUser);
+
+app.route('/users')
+    .get(checkAdmin, user.getUsers);
 
 module.exports = app;

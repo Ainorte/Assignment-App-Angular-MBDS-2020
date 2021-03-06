@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-content>
+    <h2>Ajouter une classe</h2>
+    <form [formGroup]="form" novalidate (ngSubmit)="submit()" #loginForm >
+      <mat-form-field>
+        <mat-label>Nom de la classe</mat-label>
+        <input
+          formControlName="nom"
+          name="nom"
+          matInput
+          required />
+        <mat-error>Nom obligatoire</mat-error>
+      </mat-form-field>
+      <button class="submit" mat-raised-button color="primary">
+        Ajouter une classe
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

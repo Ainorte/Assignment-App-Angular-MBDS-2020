@@ -6,8 +6,8 @@
       </a>
       <h1>{{title}}</h1>
       <span class="spacer"></span>
-      <a *ngIf="isLogged" mat-icon-button routerLink="/add" aria-label="Ajouter un devoir">
-        <mat-icon>add</mat-icon>
+      <a *ngIf="isAdmin" mat-icon-button routerLink="/users" aria-label="Utilisateurs">
+        <mat-icon>people</mat-icon>
       </a>
       <button *ngIf="isLogged" mat-icon-button aria-label="Se déconnecter" (click)="logout()">
         <mat-icon>logout</mat-icon>
