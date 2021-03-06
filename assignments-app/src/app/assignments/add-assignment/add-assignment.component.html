@@ -1,4 +1,4 @@
-<form #formAssignment class="form">
+<!-- <form #formAssignment class="form">
   <mat-form-field>
     <input [(ngModel)]="nomDevoir"
            matInput
@@ -21,4 +21,48 @@
   <button mat-raised-button color="primary" (click)="onSubmit(); formAssignment.reset()">
     Ajouter un devoir
   </button>
+</form> -->
+
+
+
+<form #formAssignment class="form">
+  <mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="nomDevoir" errorMessage="Le nom du devoir est obligatoire">
+        <ng-template matStepLabel>Saisissez le nom du devoir</ng-template>
+        <mat-form-field>
+          <mat-label>Nom du devoir</mat-label>
+          <input matInput placeholder="Nom du devoir" name="nom" formControlName="nameCtrl" required>
+        </mat-form-field>
+        <div>
+  
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="dateRendu" errorMessage="La date de rendu est obligatoire">
+        <ng-template matStepLabel>Choisissez la date de rendu</ng-template>
+        <mat-form-field>
+          <mat-label>Date de rendu</mat-label>
+          <input [matDatepicker]="picker" matInput placeholder="Date de rendu" name="date" formControlName="dateCtrl"
+                 required>
+          <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div>
+  
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-raised-button color="primary" (click)="onSubmit(); formAssignment.reset()">
+          Ajouter un devoir
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 </form>

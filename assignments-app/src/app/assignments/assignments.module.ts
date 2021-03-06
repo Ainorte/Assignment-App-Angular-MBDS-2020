@@ -19,6 +19,8 @@ import { EditAssignmentComponent } from './edit-assignment/edit-assignment.compo
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 
 
@@ -46,7 +48,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatDividerModule,
     MatCheckboxModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatStepperModule
   ]
 })
 export class AssignmentsModule {
