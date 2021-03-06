@@ -55,13 +55,13 @@
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
+      <ng-template matStepLabel>Ajout du devoir</ng-template>
+      <p>Vous pouvez ajouter le devoir ou modifier votre saisie si vous le souhaitez</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
         <button mat-raised-button color="primary" (click)="onSubmit();">
-          Ajouter un devoir
+          Ajouter le devoir
         </button>
       </div>
     </mat-step>
