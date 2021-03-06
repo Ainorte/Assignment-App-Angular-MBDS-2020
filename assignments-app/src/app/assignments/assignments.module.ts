@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {AssignmentsComponent} from './assignments.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
@@ -35,22 +35,22 @@ import {MatStepperModule} from '@angular/material/stepper';
   exports: [
     AssignmentsComponent
   ],
-  imports: [
-    CommonModule,
-    MatTabsModule,
-    MatIconModule,
-    FormsModule,
-    MatDatepickerModule, MatNativeDateModule,
-    MatInputModule, MatButtonModule,
-    RouterModule,
-    ScrollingModule,
-    MatListModule,
-    MatDividerModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatGridListModule,
-    MatStepperModule
-  ]
+    imports: [
+        CommonModule,
+        MatTabsModule,
+        MatIconModule,
+        FormsModule,
+        MatDatepickerModule, MatNativeDateModule,
+        MatInputModule, MatButtonModule,
+        RouterModule,
+        ScrollingModule,
+        MatListModule,
+        MatDividerModule,
+        MatCheckboxModule,
+        MatCardModule,
+        MatGridListModule,
+        MatStepperModule, ReactiveFormsModule
+    ]
 })
 export class AssignmentsModule {
 }

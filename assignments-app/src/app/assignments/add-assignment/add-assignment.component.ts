@@ -15,7 +15,6 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 })
 export class AddAssignmentComponent implements OnInit {
 
-  formGroup: FormGroup;
   nameFormGroup: FormGroup;
   dateFormGroup: FormGroup;
 

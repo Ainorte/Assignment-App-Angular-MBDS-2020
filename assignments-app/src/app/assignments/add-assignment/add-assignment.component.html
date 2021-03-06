@@ -23,23 +23,23 @@
   </button>
 </form> -->
 
-
-
-<form #formAssignment class="form">
-  <mat-horizontal-stepper #stepper>
-    <mat-step [stepControl]="nomDevoir" errorMessage="Le nom du devoir est obligatoire">
-        <ng-template matStepLabel>Saisissez le nom du devoir</ng-template>
+<mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="nameFormGroup" errorMessage="Le nom du devoir est obligatoire">
+      <form [formGroup]="nameFormGroup">
+      <ng-template matStepLabel>Saisissez le nom du devoir</ng-template>
         <mat-form-field>
           <mat-label>Nom du devoir</mat-label>
           <input matInput placeholder="Nom du devoir" name="nom" formControlName="nameCtrl" required>
         </mat-form-field>
         <div>
-  
+
           <button mat-button matStepperNext>Next</button>
         </div>
+      </form>
     </mat-step>
-    <mat-step [stepControl]="dateRendu" errorMessage="La date de rendu est obligatoire">
-        <ng-template matStepLabel>Choisissez la date de rendu</ng-template>
+    <mat-step [stepControl]="dateFormGroup" errorMessage="La date de rendu est obligatoire">
+      <form [formGroup]="dateFormGroup">
+      <ng-template matStepLabel>Choisissez la date de rendu</ng-template>
         <mat-form-field>
           <mat-label>Date de rendu</mat-label>
           <input [matDatepicker]="picker" matInput placeholder="Date de rendu" name="date" formControlName="dateCtrl"
@@ -48,10 +48,11 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <div>
-  
+
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
+      </form>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
@@ -65,4 +66,3 @@
       </div>
     </mat-step>
   </mat-horizontal-stepper>
-</form>
