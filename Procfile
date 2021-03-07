@@ -1,0 +1,1 @@
+web: cd assignments-app | npm install | npm heroku-postbuild
