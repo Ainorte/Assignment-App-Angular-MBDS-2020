@@ -7,7 +7,15 @@ function getAssignments(req, res){
     const { page, l, rendu } = req.query;
     const { limit, offset } = getPagination(page, l);
 
-    const aggregate = rendu != null ? Assignment.aggregate([{$match: {rendu: JSON.parse(rendu)}}]) : Assignment.aggregate();
+    let aggregate = Assignment.aggregate();
+
+    if(JSON.parse(rendu)){
+        aggregate  = rendu != null ? Assignment.aggregate([{$match : {"note":{$exists:true}}}]) : Assignment.aggregate();
+    }
+    else{
+        aggregate = rendu != null ? Assignment.aggregate([{$match : {"note":{$exists:false}}}]) : Assignment.aggregate();
+    }
+
 
     Assignment.aggregatePaginate(aggregate ,{offset, limit}, (err, data) => {
         if(err){
@@ -35,10 +43,19 @@ function getAssignment(req, res){
 // Ajout d'un assignment (POST)
 function postAssignment(req, res){
     let assignment = new Assignment();
-    assignment.id = req.body.id;
     assignment.nom = req.body.nom;
     assignment.dateDeRendu = req.body.dateDeRendu;
-    assignment.rendu = req.body.rendu;
+    assignment.matiere = req.body.matiere;
+    assignment.eleve = req.body.eleve;
+    assignment.prof = req.body.prof;
+
+    if(assignment.nom === undefined ||
+        assignment.dateDeRendu === undefined ||
+        assignment.matiere === undefined ||
+        assignment.eleve === undefined ||
+        assignment.prof === undefined){
+        return res.status(400).send('Requête incomplète.');
+    }
 
     console.log("Ajout assignment :");
     console.log(assignment)

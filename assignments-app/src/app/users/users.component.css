@@ -1,4 +1,4 @@
-:host, mat-tab-group, ::ng-deep .mat-tab-body-wrapper, ::ng-deep mat-tab-body, ::ng-deep .mat-tab-body-content, .content, app-assignments-list {
+:host, mat-tab-group, ::ng-deep .mat-tab-body-wrapper, ::ng-deep mat-tab-body, ::ng-deep .mat-tab-body-content, .content, app-classes-list, app-teacher-list {
   flex: 1;
   display: flex !important;
   flex-direction: column;

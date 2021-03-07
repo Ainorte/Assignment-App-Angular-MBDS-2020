@@ -1,6 +1,7 @@
+import {User} from "../shared/user.model";
+
 export class Assignment {
 
-  // tslint:disable-next-line:variable-name
   _id?: string;
   nom: string;
   note: number;
@@ -8,6 +9,6 @@ export class Assignment {
   rendu: boolean;
   remarque: string;
   matiere: string;
-  eleve: string;
-  prof: string;
+  eleve: User;
+  prof: User;
 }

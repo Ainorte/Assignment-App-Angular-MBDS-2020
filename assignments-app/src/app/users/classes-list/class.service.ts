@@ -23,10 +23,10 @@ export class ClassService {
       .pipe(catchError(this.handleError<any>('getClasses')));
   }
 
-  getClass(id: string): Observable<Assignment>{
+  getClass(id: string): Observable<Class>{
     return this.http
-      .get<Assignment>(`${this.uri}/${id}`)
-      .pipe(catchError(this.handleError<Assignment>(`getClass(id=${id})`)));
+      .get<Class>(`${this.uri}/${id}`)
+      .pipe(catchError(this.handleError<Class>(`getClass(id=${id})`)));
   }
 
   addClass(classe: Class): Observable<any> {

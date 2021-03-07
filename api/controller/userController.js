@@ -4,7 +4,10 @@ const {checkAccount, checkAdmin} = require("../account");
 const user = require("../routes/user")
 
 app.route('/user')
-    .get(checkAccount, user.getUser);
+    .get(checkAccount, user.getMe);
+
+app.route('/users/:id')
+    .get(checkAdmin, user.getUser);
 
 app.route('/users')
     .get(checkAdmin, user.getUsers);

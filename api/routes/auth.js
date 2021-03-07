@@ -60,13 +60,13 @@ function register(req, res){
             image : image,
             role : role,
             premiere_connexion : true //On force l'utilisateur à changer son mot de passe à la première connexion
-        });
-
-        //On retourne le mot de passe, le mieux est d'envoyer le mot de passe par email.
-        res.status(200).send({
-            _id : newUser._id,
-            password : password,
-            message : 'L\'utisateur ' + email + ' à été créé avec succès.'
+        }, (err,user) => {
+            //On retourne le mot de passe, le mieux est d'envoyer le mot de passe par email.
+            res.status(200).send({
+                _id : user._id,
+                password : password,
+                message : 'L\'utisateur ' + email + ' à été créé avec succès.'
+            });
         });
     });
 

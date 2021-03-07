@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
 
     if(this.authService.isLogged) {
       //On vérifie que l'utilisateur n'est pas en première connexion.
-      return this.userService.getUser().pipe(map(user => {
+      return this.userService.getMe().pipe(map(user => {
         if (state.url != '/changepassword' && user.premiere_connexion) {
           //Si première connexion, on affiche le formulaire de nouveau mot de passe
           this.router.navigate(["changepassword"]);

@@ -20,7 +20,7 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     //On vérifie que l'utilisateur n'est pas en première connexion.
-    return this.userService.getUser().pipe(map(user => {
+    return this.userService.getMe().pipe(map(user => {
       if (state.url != '/changepassword' && user.premiere_connexion) {
         //Si première connexion, on affiche le formulaire de nouveau mot de passe
         this.router.navigate(["changepassword"]);

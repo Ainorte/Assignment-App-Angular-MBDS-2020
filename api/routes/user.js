@@ -4,6 +4,7 @@ const {getPagination} = require("../tools");
 
 function transformUser(user){
     return {
+        _id: user._id,
         prenom: user.prenom,
         nom: user.nom,
         email: user.email,
@@ -13,8 +14,19 @@ function transformUser(user){
     };
 }
 
-function getUser(req, res){
+function getMe(req, res){
     res.send(transformUser(req.user));
+}
+
+function getUser(req, res){
+    let userId = req.params.id;
+    User.findOne({_id: userId}, (err, user) =>{
+        if(err){
+            console.log(err);
+            return res.status(500).send('Erreur sur le serveur.');
+        }
+        return res.json(transformUser(user));
+    })
 }
 
 function getUsers(req, res){
@@ -41,4 +53,4 @@ function getUsers(req, res){
     })
 }
 
-module.exports = { getUser, getUsers };
+module.exports = { getUser, getMe, getUsers };

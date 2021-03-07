@@ -3,8 +3,12 @@ const {getPagination} = require("../tools");
 
 function getClasses(req, res){
 
-    const { page, l} = req.query;
-    const { limit, offset } = getPagination(page, l);
+    let { page, l} = req.query;
+    let { limit, offset } = getPagination(page, l);
+
+    if(l === 0){
+        limit = 10000000;
+    }
 
     classes.aggregatePaginate(classes.aggregate() ,{offset, limit}, (err, data) => {
         if(err){
@@ -29,19 +33,33 @@ function getClass(req, res){
 }
 
 function postClass(req, res){
-    let classe = new classes();
-    classe.nom = req.body.nom;
-
-    console.log("Ajout classe :");
-    console.log(classe)
-
-    classe.save( (err) => {
-        if(err){
-            console.log(err);
+    classes.findOne({nom: req.body.nom}, (err, classe) => {
+        //Erreur sur mongo
+        if (err) {
+            console.log(err)
             return res.status(500).send('Erreur sur le serveur.');
         }
-        return res.json({ message: 'Devoir enregistré.'})
-    })
+
+        //Doublon trouvé
+        if (classe) {
+            console.log("Classe déjà existant");
+            return res.status(400).send('Classe déjà existant.');
+        }
+
+        let c = new classes();
+        c.nom = req.body.nom;
+
+        console.log("Ajout classe :");
+        console.log(c)
+
+        c.save((err) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send('Erreur sur le serveur.');
+            }
+            return res.json({message: 'Devoir enregistré.'})
+        })
+    });
 }
 
 function updateClass(req, res) {

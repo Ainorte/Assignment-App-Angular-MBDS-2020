@@ -7,7 +7,7 @@ const AssignmentSchema = Schema({
     nom: String,
     note: Number,
     remarque: String,
-    matiere: { type: Schema.Types.ObjectId, ref: 'Matiere' },
+    matiere: String,
     eleve: { type: Schema.Types.ObjectId, ref: 'User' },
     prof: { type: Schema.Types.ObjectId, ref: 'User' }
 });

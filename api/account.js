@@ -52,4 +52,14 @@ function checkAdmin(req, res, next){
     });
 }
 
-module.exports = {checkAccount, checkAdmin};
+function checkTeacher(req, res, next){
+    checkAccount(req, res, function () {
+        if (req.user.role !== role.ADMIN && req.user.role !== role.TEACHER){
+            return res.status(403).send('Accès interdit');
+        }
+
+        return next();
+    });
+}
+
+module.exports = {checkAccount, checkAdmin, checkTeacher};

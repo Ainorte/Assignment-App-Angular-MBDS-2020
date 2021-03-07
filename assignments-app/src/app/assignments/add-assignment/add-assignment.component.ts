@@ -4,6 +4,9 @@ import {Router} from '@angular/router';
 import {Assignment} from '../assignment.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {UserService} from "../../shared/user.service";
+import {ClassService} from "../../users/classes-list/class.service";
+import {Class} from "../../users/classes-list/class.model";
 
 @Component({
   selector: 'app-add-assignment',
@@ -18,35 +21,52 @@ export class AddAssignmentComponent implements OnInit {
   nameFormGroup: FormGroup;
   dateFormGroup: FormGroup;
 
-  nomDevoir: string;
-  dateRendu: Date;
+  classes:Class[] = [];
 
   constructor(private assignmentsService: AssignmentsService,
               private router: Router,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: FormBuilder,
+              private userService: UserService,
+              private classService:ClassService) {
   }
 
   ngOnInit() {
+    this.classService.getClasses(1,0).subscribe(data =>{
+      this.classes = data.docs;
+    });
+
     this.nameFormGroup = this._formBuilder.group({
-      nameCtrl: ['', Validators.required]
+      nameCtrl: ['', Validators.required],
+      matiereCtrl: ['', Validators.required]
     });
     this.dateFormGroup = this._formBuilder.group({
-      dateCtrl: ['', Validators.required]
+      dateCtrl: ['', Validators.required],
+      classCtrl: [null, Validators.required]
     });
   }
 
+
+
   onSubmit(): void {
-    const newAssignment = new Assignment();
+    if(this.nameFormGroup.valid && this.dateFormGroup.valid){
+      const newAssignment = new Assignment();
 
-    newAssignment.nom = this.nomDevoir;
-    newAssignment.dateDeRendu = this.dateRendu;
-    newAssignment.rendu = false;
+      newAssignment.nom = this.nameFormGroup.controls.nameCtrl.value;
+      newAssignment.dateDeRendu = this.dateFormGroup.controls.dateCtrl.value;
+      newAssignment.matiere = this.nameFormGroup.controls.matiereCtrl.value;
+      newAssignment.prof = this.userService.user;
 
-    this.assignmentsService.addAssignment(newAssignment)
-      .subscribe(message => {
-        console.log(message);
-        // On veut re-afficher la page d'accueil avec la liste
-        this.router.navigate(['/home']);
-      });
+      const eleves = this.dateFormGroup.controls.classCtrl.value.eleves;
+
+      for(let i = 0; i < eleves.length; i++ ){
+        newAssignment.eleve = eleves[i];
+        this.assignmentsService.addAssignment(newAssignment)
+          .subscribe(message => {
+
+          });
+      }
+      // On veut re-afficher la page d'accueil avec la liste
+      this.router.navigate(['/home']);
+    }
   }
 }

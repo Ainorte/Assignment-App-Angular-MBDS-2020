@@ -15,11 +15,12 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import { AddTeacherComponent } from './teacher-list/add-teacher/add-teacher.component';
 import {MatSelectModule} from "@angular/material/select";
+import { AddStudentComponent } from './classes-list/add-student/add-student.component';
 
 
 
 @NgModule({
-  declarations: [UsersComponent, TeacherListComponent, ClassesListComponent, AddClassComponent, AddTeacherComponent],
+  declarations: [UsersComponent, TeacherListComponent, ClassesListComponent, AddClassComponent, AddTeacherComponent, AddStudentComponent],
   imports: [
     CommonModule,
     MatTabsModule,

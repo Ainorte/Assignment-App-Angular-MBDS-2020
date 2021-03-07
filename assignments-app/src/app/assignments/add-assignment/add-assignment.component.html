@@ -1,51 +1,38 @@
-<!-- <form #formAssignment class="form">
-  <mat-form-field>
-    <input [(ngModel)]="nomDevoir"
-           matInput
-           name="nom"
-           placeholder="Nom du devoir"
-    >
-  </mat-form-field>
-
-  <mat-form-field>
-    <input [(ngModel)]="dateRendu"
-           [matDatepicker]="picker"
-           matInput
-           name="date"
-           placeholder="Date de rendu"
-    >
-    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="onSubmit(); formAssignment.reset()">
-    Ajouter un devoir
-  </button>
-</form> -->
-
 <mat-horizontal-stepper #stepper>
-    <mat-step [stepControl]="nameFormGroup" errorMessage="Le nom du devoir est obligatoire">
+    <mat-step [stepControl]="nameFormGroup" errorMessage="Étape obligatoire">
       <form [formGroup]="nameFormGroup">
-      <ng-template matStepLabel>Saisissez le nom du devoir</ng-template>
+      <ng-template matStepLabel>Saisissez les infos sur le devoir</ng-template>
         <mat-form-field>
           <mat-label>Nom du devoir</mat-label>
           <input matInput placeholder="Nom du devoir" name="nom" formControlName="nameCtrl" required>
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>Matière</mat-label>
+          <input matInput placeholder="Matière" name="matiere" formControlName="matiereCtrl" required>
+        </mat-form-field>
         <div>
-
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="dateFormGroup" errorMessage="La date de rendu est obligatoire">
+    <mat-step [stepControl]="dateFormGroup" errorMessage="Étape obligatoire">
       <form [formGroup]="dateFormGroup">
-      <ng-template matStepLabel>Choisissez la date de rendu</ng-template>
+      <ng-template matStepLabel>Choisissez la date et la classe</ng-template>
         <mat-form-field>
           <mat-label>Date de rendu</mat-label>
           <input [matDatepicker]="picker" matInput placeholder="Date de rendu" name="date" formControlName="dateCtrl"
                  required>
           <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Classe</mat-label>
+          <mat-select formControlName="classCtrl">
+            <mat-option *ngFor="let classe of classes" [value]="classe">
+              {{classe.nom}}
+            </mat-option>
+          </mat-select>
+          <mat-error>Classe obligatoire</mat-error>
         </mat-form-field>
         <div>
 

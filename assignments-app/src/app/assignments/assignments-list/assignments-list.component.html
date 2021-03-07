@@ -5,12 +5,12 @@
         <mat-card>
           <mat-card-header>
             <mat-card-title>{{assignment.nom}}</mat-card-title>
-          <mat-card-subtitle *ngIf="assignment.rendu">Rendu le : {{ assignment.dateDeRendu | date }}</mat-card-subtitle>
-          <mat-card-subtitle *ngIf="!assignment.rendu">A rendre le : {{ assignment.dateDeRendu | date }}</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="!this.rendu">Rendu le : {{ assignment.dateDeRendu | date }}</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="this.rendu">A rendre le : {{ assignment.dateDeRendu | date }}</mat-card-subtitle>
           </mat-card-header>
 
           <mat-card-content>
-            <p *ngIf="rendu; else nonSoumis">
+            <p *ngIf="!this.rendu; else nonSoumis">
               Le devoir {{ assignment.nom }} a été rendu.
             </p>
             <ng-template #nonSoumis>

@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import {Class} from "../class.model";
+import {ActivatedRoute, Route, Router} from "@angular/router";
+import {ClassService} from "../class.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
 import {Role, User} from "../../../shared/user.model";
-import {UserService} from "../../../shared/user.service";
 import {MatSnackBar, MatSnackBarRef, TextOnlySnackBar} from "@angular/material/snack-bar";
+import {UserService} from "../../../shared/user.service";
 
 @Component({
-  selector: 'app-add-teacher',
-  templateUrl: './add-teacher.component.html',
-  styleUrls: ['./add-teacher.component.scss']
+  selector: 'app-add-student',
+  templateUrl: './add-student.component.html',
+  styleUrls: ['./add-student.component.scss']
 })
-export class AddTeacherComponent implements OnInit {
+export class AddStudentComponent implements OnInit {
 
-  Role = Role;
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private classService:ClassService,
+              private userService:UserService,
+              private snackBar:MatSnackBar) { }
+
+  classe : Class;
   valid = false;
   password = '';
 
@@ -23,17 +31,16 @@ export class AddTeacherComponent implements OnInit {
     nom: new FormControl('', [Validators.required]),
     prenom: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    role: new FormControl(Role.TEACHER, [Validators.required]),
-    image: new FormControl('')
   });
 
-  constructor(private userService: UserService,
-              private router: Router,
-              private snackBar:MatSnackBar) {
-  }
-
   ngOnInit(): void {
-
+    const id = this.route.snapshot.params.id;
+    this.classService.getClass(id).subscribe( classe =>{
+      if(classe == undefined){
+        this.router.navigate(['/users']);
+      }
+      this.classe = classe;
+    });
   }
 
   submit() {
@@ -47,14 +54,20 @@ export class AddTeacherComponent implements OnInit {
       user.nom = this.form.controls.nom.value;
       user.prenom = this.form.controls.prenom.value;
       user.email = this.form.controls.email.value;
-      user.role = this.form.controls.role.value;
-      user.image = this.form.controls.image.value;
+      user.role = Role.STUDENT;
+
       this.userService.register(user).subscribe(data => {
         if(data != undefined){
           this.password = data.password;
-          this.valid = true;
-          this.form.disable()
-          this.messageSnackBar = this.snackBar.open("L'utilisateur a été créé");
+
+          this.userService.getUser(data._id).subscribe(user =>{
+            this.classe.eleves.push(user)
+            this.classService.updateClass(this.classe).subscribe(d => {
+              this.valid = true;
+              this.form.disable();
+              this.messageSnackBar = this.snackBar.open("L'utilisateur a été créé");
+            })
+          })
         }
         else {
           this.messageSnackBar = this.snackBar.open("L'utilisateur n'a pas pu être créé");
@@ -76,4 +89,5 @@ export class AddTeacherComponent implements OnInit {
     this.messageSnackBar.dismiss();
     this.password = '';
   }
+
 }

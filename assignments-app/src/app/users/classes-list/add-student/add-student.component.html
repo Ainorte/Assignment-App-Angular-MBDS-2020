@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-    <h2>Ajouter un professeur</h2>
+    <h2>Ajouter un élève en {{classe.nom}}</h2>
     <form [formGroup]="form" novalidate (ngSubmit)="submit()" #loginForm >
       <mat-form-field>
         <mat-label>Nom</mat-label>
@@ -37,26 +37,8 @@
           </mat-error>
         </ng-template>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Image</mat-label>
-        <input
-          formControlName="image"
-          name="image"
-          type="url"
-          matInput/>
-        <mat-hint>Url de l'image</mat-hint>
-        <mat-error>Format invalide</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Rôle</mat-label>
-        <mat-select formControlName="role">
-          <mat-option [value]=" Role.TEACHER">{{Role.TEACHER}}</mat-option>
-          <mat-option [value]="Role.ADMIN">{{Role.ADMIN}}</mat-option>
-        </mat-select>
-        <mat-error>Rôle obligatoire</mat-error>
-      </mat-form-field>
       <button class="submit" *ngIf="!valid" mat-raised-button color="primary">
-        Ajouter un professeur
+        Ajouter un élève
       </button>
     </form>
     <mat-form-field *ngIf="valid">

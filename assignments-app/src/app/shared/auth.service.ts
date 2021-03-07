@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {Observable, of} from "rxjs";
 import {catchError, map} from "rxjs/operators";
 import {Auth, AuthResponse} from "./auth.model";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
     return this.token != null;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private  userService: UserService) {}
 
   logIn(email:String, password:String): Observable<Auth> {
     const body = {
@@ -47,6 +49,7 @@ export class AuthService {
   logOut(): Observable<Auth>{
     //Remove token disable login
     this.token = null
+    this.userService.user = undefined;
 
     const result = new Auth();
     result.auth = false;
